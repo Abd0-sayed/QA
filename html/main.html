@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+</head>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    a{
+        border: 2px black solid;
+        position: relative;
+        left: 46%;
+        top: 20px;
+        padding: 5px;
+    }
+</style>
+
+
+
+<body>
+    <a href="./contactus.html">Contact Us</a>
+       <div class="row g-3 w-50 m-auto mt-5 p-4 rounded border border-black">
+        
+                <div class="col-md-6">
+    <label class="usname" for="Price">Car Price</label>
+    <div class="input-group">
+      
+      <input type="number" class="form-control"  id="Price" placeholder="EX:800,000">
+    </div>
+  </div>
+  <div class="col-md-6">
+    <label class="usname" for="Deposit">Deposit</label>
+    <div class="input-group">
+      <input type="number" class="form-control" id="Deposit" placeholder="EX:200,000">
+    </div>
+  </div>
+  <div class="col-md-6 my-3 m-auto">
+    <label for="month" class="form-label">Month</label>
+    <select id="month" class="form-select">
+      <option selected value="12">12</option>
+      <option value="24">24</option>
+      <option value="36">36</option>
+      <option value="48">48</option>
+      <option value="60">60</option>
+    </select>
+  </div>
+  <div class=" h-50">
+    <h1 class="d-inline-block"> Payment By Month :  </h1>
+    <h2 class=" d-inline-block " id="ans">  0 </h2>
+  </div>
+        <button onclick="calculateInstallment()" class="btn btn-primary">Calculate</button>
+
+
+        </div>
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<script>
+    function calculateInstallment() {
+    const monthlyInterest = 0.027
+    carPrice= document.getElementById("Price").value
+    downPayment=document.getElementById("Deposit").value
+    months=document.getElementById("month").value
+    const loanAmount = carPrice - downPayment; 
+    if(carPrice<downPayment ||carPrice==downPayment)
+    {
+            document.getElementById("ans").textContent="Price must be Bigger than Deposit " 
+    }
+    else{
+        const r = monthlyInterest;
+        const n = months;
+
+        const emi = loanAmount * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            const emiInt = Math.round(emi); // integer only
+
+        // return emiInt.toLocaleString(); // add commas
+            document.getElementById("ans").textContent=emiInt
+    }
+}
+
+    
+</script>
+</body>
+</html>
